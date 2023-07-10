@@ -40,12 +40,12 @@ public class FinnhubService : IFinnhubService
 
             //convert from json to c# object(dictionary)
             Dictionary<string, object>? responseDictionary = JsonSerializer.Deserialize<Dictionary<string, object>>(response);
-
+            // provjeravamo da li je response null
             if (responseDictionary == null)
             {
                 throw new InvalidOperationException("No response from finhub server");
             }
-
+            // provjeravamo da li response sadrzi error(key)
             if (responseDictionary.ContainsKey("error"))
             {
                 throw new InvalidOperationException(Convert.ToString(responseDictionary["error"]));
